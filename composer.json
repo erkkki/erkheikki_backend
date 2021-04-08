@@ -49,7 +49,7 @@
     "phpunit": [
       "bin/phpunit --colors=always"
     ],
-    "tests": [
+    "test": [
       "@phpunit"
     ]
   },
