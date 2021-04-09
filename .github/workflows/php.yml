@@ -52,32 +52,18 @@ jobs:
       - name: Check Symfony requirements
         run: vendor/bin/requirements-checker
 
-          #      - name: Check the Symfony console
-          #        run: |
-          #          bin/console about
-        #          bin/console strangebuzz:version
+      # —— Coding standards ✨ ————————————————————————————————————————————————
 
-        # —— Coding standards ✨ ————————————————————————————————————————————————
-      - name: Install PHP_CodeSniffer
-        run: |
-          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-          php phpcs.phar --version
 
-      - uses: tinovyatkin/action-php-codesniffer@v1
-        with:
-          files: "**.php" # you may customize glob as needed
-          phpcs_path: php phpcs.phar
-          standard: phpcs.xml
-          #      - name: Coding standards checks (php_codesniffer + php-cs-fixer)
-          #        run: make cs
 
-          # —— Static analysis ✨ —————————————————————————————————————————————————
-          #          - name: Static analysis of PHP code (PHPStan)
-          #        run: make static-analysis
-          #        if: matrix.php-versions == '7.4'
+      # —— Static analysis ✨ —————————————————————————————————————————————————
+      - name: Static analysis of PHP code (PHPStan)
+        run: vendor/bin/phpstan analyse src tests
 
-          # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-        # Docs: https://getcomposer.org/doc/articles/scripts.md
-
+      # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+      # Docs: https://getcomposer.org/doc/articles/scripts.md
+      
       - name: Run test suite
         run: composer run-script test
+
+
