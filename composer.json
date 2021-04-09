@@ -53,7 +53,8 @@
     "test": [
       "@phpunit"
     ],
-    "phpstan": "phpstan analyse -c phpstan.neon.dist src tests --level 7 --no-progress"
+    "phpstan": "phpstan analyse -c phpstan.neon.dist src tests --level 7 --no-progress",
+    "codesniffer": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR12 -n -p src/"
   },
   "conflict": {
     "symfony/symfony": "*"
@@ -67,6 +68,7 @@
   "require-dev": {
     "phpstan/extension-installer": "^1.1",
     "phpstan/phpstan-symfony": "^0.12.22",
+    "squizlabs/php_codesniffer": "^3.6",
     "symfony/phpunit-bridge": "^5.2",
     "symfony/requirements-checker": "^2.0"
   },

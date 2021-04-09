@@ -53,6 +53,8 @@ jobs:
         run: vendor/bin/requirements-checker
 
       # —— Coding standards ✨ ————————————————————————————————————————————————
+      - name: Codesniffer, PSR12
+        run: composer run codesniffer
 
       # —— Tests standards ✨ ————————————————————————————————————————————————
       - name: Run test suite
