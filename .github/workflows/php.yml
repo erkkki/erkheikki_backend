@@ -54,8 +54,9 @@ jobs:
 
       # —— Coding standards ✨ ————————————————————————————————————————————————
 
-
-
+      # —— Tests standards ✨ ————————————————————————————————————————————————
+      - name: Run test suite
+        run: composer run-script test
       # —— Static analysis ✨ —————————————————————————————————————————————————
       - name: Static analysis of PHP code (PHPStan)
         run: composer run phpstan
@@ -63,7 +64,6 @@ jobs:
       # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
       # Docs: https://getcomposer.org/doc/articles/scripts.md
 
-      - name: Run test suite
-        run: composer run-script test
+
 
 
