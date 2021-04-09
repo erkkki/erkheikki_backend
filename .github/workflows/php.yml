@@ -47,16 +47,27 @@ jobs:
         run: composer install
 
       # —— Symfony 🎵 ——————————————————————————————————————————————————————————
-#      - name: Check Symfony requirements
-      #        run: vendor/bin/requirements-checker
+      - name: Check Symfony requirements
+        run: vendor/bin/requirements-checker
 
-      #      - name: Check the Symfony console
-      #        run: |
-      #          bin/console about
-      #          bin/console strangebuzz:version
+          #      - name: Check the Symfony console
+          #        run: |
+          #          bin/console about
+          #          bin/console strangebuzz:version
 
-      # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-      # Docs: https://getcomposer.org/doc/articles/scripts.md
+          ## —— Coding standards ✨ ————————————————————————————————————————————————
+          # Can't handle PHP8 for now
+          #          - name: Coding standards checks (php_codesniffer + php-cs-fixer)
+          #        run: make cs
+          #        if: matrix.php-versions == '7.4'
+
+          ## —— Static analysis ✨ —————————————————————————————————————————————————
+          #          - name: Static analysis of PHP code (PHPStan)
+          #        run: make static-analysis
+          #        if: matrix.php-versions == '7.4'
+
+          # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+          # Docs: https://getcomposer.org/doc/articles/scripts.md
 
       - name: Run test suite
         run: composer run-script test
