@@ -15,6 +15,8 @@ jobs:
       # https://github.com/actions/checkout (official)
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # important!
 
       # https://github.com/shivammathur/setup-php (community)
       - name: Setup PHP, extensions and composer with shivammathur/setup-php
@@ -53,21 +55,29 @@ jobs:
           #      - name: Check the Symfony console
           #        run: |
           #          bin/console about
-          #          bin/console strangebuzz:version
+        #          bin/console strangebuzz:version
 
-          ## —— Coding standards ✨ ————————————————————————————————————————————————
-          # Can't handle PHP8 for now
-          #          - name: Coding standards checks (php_codesniffer + php-cs-fixer)
+        # —— Coding standards ✨ ————————————————————————————————————————————————
+      - name: Install PHP_CodeSniffer
+        run: |
+          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+          php phpcs.phar --version
+
+      - uses: tinovyatkin/action-php-codesniffer@v1
+        with:
+          files: "**.php" # you may customize glob as needed
+          phpcs_path: php phpcs.phar
+          standard: phpcs.xml
+          #      - name: Coding standards checks (php_codesniffer + php-cs-fixer)
           #        run: make cs
-          #        if: matrix.php-versions == '7.4'
 
-          ## —— Static analysis ✨ —————————————————————————————————————————————————
+          # —— Static analysis ✨ —————————————————————————————————————————————————
           #          - name: Static analysis of PHP code (PHPStan)
           #        run: make static-analysis
           #        if: matrix.php-versions == '7.4'
 
           # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-          # Docs: https://getcomposer.org/doc/articles/scripts.md
+        # Docs: https://getcomposer.org/doc/articles/scripts.md
 
       - name: Run test suite
         run: composer run-script test
