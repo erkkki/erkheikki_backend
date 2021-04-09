@@ -52,7 +52,8 @@
     ],
     "test": [
       "@phpunit"
-    ]
+    ],
+    "phpstan": "phpstan analyse -c phpstan.neon.dist src tests --level 7 --no-progress"
   },
   "conflict": {
     "symfony/symfony": "*"
@@ -64,7 +65,8 @@
     }
   },
   "require-dev": {
-    "phpstan/phpstan": "^0.12.83",
+    "phpstan/extension-installer": "^1.1",
+    "phpstan/phpstan-symfony": "^0.12.22",
     "symfony/phpunit-bridge": "^5.2",
     "symfony/requirements-checker": "^2.0"
   },
