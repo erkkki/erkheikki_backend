@@ -54,7 +54,8 @@
       "@phpunit"
     ],
     "phpstan": "phpstan analyse -c phpstan.neon.dist src tests --level 7 --no-progress",
-    "codesniffer": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR12 -n -p src/"
+    "codesniffer": "phpcs --standard=PSR12 -n -p ./src",
+    "codesniffer2": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR12 -n -p /src/"
   },
   "conflict": {
     "symfony/symfony": "*"
