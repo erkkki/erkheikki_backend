@@ -71,8 +71,14 @@ jobs:
         run: composer run phpstan
 
       # —— Sql ✨ —————————————————————————————————————————————————
-#      - name: Sql
-#        run: composer run sql
+      - name: Load Doctrine fixtures
+        run: |
+          php bin/console doctrine:cache:clear-metadata
+          php bin/console doctrine:database:create --if-not-exists
+          php bin/console doctrine:schema:drop --force
+          php bin/console doctrine:schema:create
+          php bin/console doctrine:schema:validate
+#          php bin/console doctrine:fixtures:load -n
       # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
       # Docs: https://getcomposer.org/doc/articles/scripts.md
 
