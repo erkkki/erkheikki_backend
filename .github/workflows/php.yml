@@ -40,6 +40,9 @@ jobs:
       - name: Check PHP Version
         run: php -v
 
+      - name: Start mysql service
+        run: sudo /etc/init.d/mysql start
+
       # —— Composer 🧙‍️ —————————————————————————————————————————————————————————
       - name: Validate composer.json and composer.lock
         run: composer validate
