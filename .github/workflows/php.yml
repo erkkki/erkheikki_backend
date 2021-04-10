@@ -10,6 +10,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       # https://github.com/actions/checkout (official)
@@ -17,13 +27,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # important!
-
-      - name: MySql
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          host port: 3306
-          mysql user: 'db_user'
-          mysql password: 'password'
 
       # https://github.com/shivammathur/setup-php (community)
       - name: Setup PHP, extensions and composer with shivammathur/setup-php
