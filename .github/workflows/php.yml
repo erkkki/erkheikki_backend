@@ -65,10 +65,6 @@ jobs:
       - name: Check Symfony requirements
         run: vendor/bin/requirements-checker
 
-      # —— Install phpunit ✨ ————————————————————————————————————————————————
-      - name: Install phpunit
-        run: composer run phpunit-install
-
       # —— Doctrine Fixtures ✨ —————————————————————————————————————————————————
       - name: Load Doctrine fixtures, create database, tables etc.
         run: |
