@@ -77,13 +77,14 @@ jobs:
         run: composer run phpstan
 
       # —— Sql ✨ —————————————————————————————————————————————————
-      - name: Load Doctrine fixtures
+      - name: Load Doctrine fixtures, create database, tables etc.
         run: |
-          php bin/console doctrine:cache:clear-metadata
-          php bin/console doctrine:database:create --if-not-exists
-          php bin/console doctrine:schema:drop --force
-          php bin/console doctrine:schema:create
-          php bin/console doctrine:schema:validate
+          bin/console doctrine:cache:clear-metadata
+          bin/console doctrine:database:create --if-not-exists
+          bin/console doctrine:schema:drop --force
+          bin/console doctrine:schema:create
+          bin/console doctrine:schema:validate
+          bin/console doctrine:fixtures:load
         env:
           DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
       # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
