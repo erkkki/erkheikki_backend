@@ -15,12 +15,12 @@ class Message
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $message;
+    private string $message;
 
     public function getId(): ?int
     {

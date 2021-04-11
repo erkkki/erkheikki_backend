@@ -8,7 +8,7 @@ use App\Entity\Message;
 
 class MessageFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $message = new Message();
         $message->setMessage('lorem ipsum');

@@ -71,7 +71,7 @@ jobs:
 
       # —— Tests standards ✨ ————————————————————————————————————————————————
       - name: Run test suite
-        run: composer run-script test
+        run: composer run phpunit
       # —— Static analysis ✨ —————————————————————————————————————————————————
       - name: Static analysis of PHP code (PHPStan)
         run: composer run phpstan
