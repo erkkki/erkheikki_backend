@@ -53,7 +53,10 @@
       "@auto-scripts"
     ],
     "phpunit": [
-      "bin/phpunit --colors=always"
+      "bin/phpunit"
+    ],
+    "phpunit-install": [
+      "bin/phpunit"
     ],
     "test": [
       "@phpstan",

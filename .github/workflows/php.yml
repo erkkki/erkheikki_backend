@@ -65,18 +65,11 @@ jobs:
       - name: Check Symfony requirements
         run: vendor/bin/requirements-checker
 
-      # —— Coding standards ✨ ————————————————————————————————————————————————
-      - name: Codesniffer, PSR12
-        run: composer run phpcs
+      # —— Install phpunit ✨ ————————————————————————————————————————————————
+      - name: Install phpunit
+        run: composer run phpunit-install
 
-      # —— Tests standards ✨ ————————————————————————————————————————————————
-      - name: Run test suite
-        run: composer run phpunit
-      # —— Static analysis ✨ —————————————————————————————————————————————————
-      - name: Static analysis of PHP code (PHPStan)
-        run: composer run phpstan
-
-      # —— Sql ✨ —————————————————————————————————————————————————
+      # —— Doctrine Fixtures ✨ —————————————————————————————————————————————————
       - name: Load Doctrine fixtures, create database, tables etc.
         run: |
           bin/console doctrine:cache:clear-metadata
@@ -87,9 +80,21 @@ jobs:
           bin/console doctrine:fixtures:load
         env:
           DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+
+      # —— Coding standards ✨ ————————————————————————————————————————————————
+      - name: Codesniffer, PSR12
+        run: composer run phpcs
+
+      # —— Static analysis ✨ —————————————————————————————————————————————————
+      - name: Static analysis of PHP code (PHPStan)
+        run: composer run phpstan
+
       # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
       # Docs: https://getcomposer.org/doc/articles/scripts.md
 
+      # —— Tests ✨ ————————————————————————————————————————————————
+      - name: Run test suite
+        run: composer run phpunit
 
 
 
