@@ -81,6 +81,12 @@ jobs:
       - name: Codesniffer, PSR12
         run: composer run phpcs
 
+
+      # —— Tests ✨ ————————————————————————————————————————————————
+      - name: Run test suite
+        run: composer run phpunit
+
+      # Fails if run before tests...
       # —— Static analysis ✨ —————————————————————————————————————————————————
       - name: Static analysis of PHP code (PHPStan)
         run: composer run phpstan
@@ -88,9 +94,7 @@ jobs:
       # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
       # Docs: https://getcomposer.org/doc/articles/scripts.md
 
-      # —— Tests ✨ ————————————————————————————————————————————————
-      - name: Run test suite
-        run: composer run phpunit
+
 
 
 
