@@ -1,6 +1,5 @@
 <?php
 
-// src/Util/Calculator.php
 namespace App\Util;
 
 class Calculator
