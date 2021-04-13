@@ -24,6 +24,8 @@ class MessageTest extends KernelTestCase
 
     public function testMessage(): void
     {
+
+        var_dump($this->entityManager);
         $messageRepo = $this->entityManager->getRepository(Message::class);
         $message = $messageRepo->find(1);
 
