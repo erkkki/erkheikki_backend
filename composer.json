@@ -61,8 +61,8 @@
       "@phpunit"
     ],
     "phpstan": "phpstan analyse -c phpstan.neon.dist ./src ./tests --level 7 --no-progress",
-    "phpcs": "phpcs -n -p",
-    "phpcbf": "phpcbf -n -p --basepath=.",
+    "phpcs": "phpcs -n -p --basepath=. ./src ./tests",
+    "phpcbf": "phpcbf -n -p --basepath=. ./src ./tests",
     "fixtures": [
       "php bin/console doctrine:cache:clear-metadata",
       "php bin/console doctrine:database:create --if-not-exists",
