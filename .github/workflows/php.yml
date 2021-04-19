@@ -67,13 +67,7 @@ jobs:
 
       # —— Doctrine Fixtures ✨ —————————————————————————————————————————————————
       - name: Load Doctrine fixtures, create database, tables etc.
-        run: |
-          bin/console doctrine:cache:clear-metadata
-          bin/console doctrine:database:create --if-not-exists
-          bin/console doctrine:schema:drop --force
-          bin/console doctrine:schema:create
-          bin/console doctrine:schema:validate
-          bin/console doctrine:fixtures:load
+        run: composer run fixtures
         env:
           DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
