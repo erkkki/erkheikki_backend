@@ -89,7 +89,8 @@
     "squizlabs/php_codesniffer": "^3.6",
     "symfony/maker-bundle": "^1.30",
     "symfony/phpunit-bridge": "^5.2",
-    "symfony/requirements-checker": "^2.0"
+    "symfony/requirements-checker": "^2.0",
+    "ext-json": "*"
   },
   "name": "erkkki/testing",
   "description": ""
