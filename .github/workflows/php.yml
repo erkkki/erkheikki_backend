@@ -73,7 +73,7 @@ jobs:
 
       # —— Coding standards ✨ ————————————————————————————————————————————————
       - name: Codesniffer, PSR12
-        run: composer run phpcs_github
+        run: composer run phpcs
 
 
       # —— Tests ✨ ————————————————————————————————————————————————

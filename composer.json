@@ -61,9 +61,9 @@
       "@phpunit"
     ],
     "phpstan": "phpstan analyse -c phpstan.neon.dist ./src ./tests --level 7 --no-progress",
-    "phpcs": "phpcs -n -p ./src ./tests",
-    "phpcs_github": "phpcs -n -p --standard=PSR12 ./src ./tests",
-    "phpcbf": "phpcbf -n -p --standard=PSR12 --basepath=. ./src ./tests",
+    "phpcs": "phpcs -n -p --standard=PSR12 ./src ./tests",
+    "phpcs_windows": "phpcs -n -p ./src ./tests",
+    "phpcbf": "phpcbf -n -p --standard=PSR12 ./src ./tests",
     "fixtures": [
       "php bin/console doctrine:cache:clear-metadata",
       "php bin/console doctrine:database:create --if-not-exists",
