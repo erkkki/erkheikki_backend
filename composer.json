@@ -61,7 +61,7 @@
       "@phpunit"
     ],
     "phpstan": "phpstan analyse -c phpstan.neon.dist ./src ./tests --level 7 --no-progress",
-    "phpcs": "phpcs --basepath=. --config-show",
+    "phpcs": "phpcs --basepath=.",
     "phpcs2": "phpcs",
     "phpcbf": "phpcbf",
     "fixtures": [
