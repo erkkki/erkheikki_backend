@@ -75,7 +75,6 @@ jobs:
       - name: Codesniffer, PSR12
         run: composer run phpcs_github
 
-
       # —— Tests ✨ ————————————————————————————————————————————————
       - name: Run test suite
         run: composer run phpunit
