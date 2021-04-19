@@ -53,7 +53,7 @@
       "@auto-scripts"
     ],
     "phpunit": [
-      "bin/phpunit"
+      "php bin/phpunit"
     ],
     "test": [
       "@phpstan",
@@ -64,12 +64,12 @@
     "phpcs": "phpcs",
     "phpcbf": "phpcbf",
     "fixtures": [
-      "bin/console doctrine:cache:clear-metadata",
-      "bin/console doctrine:database:create --if-not-exists",
-      "bin/console doctrine:schema:drop --force",
-      "bin/console doctrine:schema:create",
-      "bin/console doctrine:schema:validate",
-      "bin/console doctrine:fixtures:load"
+      "php bin/console doctrine:cache:clear-metadata",
+      "php bin/console doctrine:database:create --if-not-exists",
+      "php bin/console doctrine:schema:drop --force",
+      "php bin/console doctrine:schema:create",
+      "php bin/console doctrine:schema:validate",
+      "php bin/console doctrine:fixtures:load"
     ]
   },
   "conflict": {
