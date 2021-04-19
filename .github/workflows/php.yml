@@ -85,6 +85,8 @@ jobs:
       # —— Tests ✨ ————————————————————————————————————————————————
       - name: Run test suite
         run: composer run phpunit
+        env:
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
       # Fails if run before tests...
       # —— Static analysis ✨ —————————————————————————————————————————————————

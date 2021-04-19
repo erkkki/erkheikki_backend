@@ -63,7 +63,14 @@
     "phpstan": "phpstan analyse -c phpstan.neon.dist ./src ./tests --level 7 --no-progress",
     "phpcs": "phpcs --standard=PSR12 -n -p ./src ./tests",
     "phpcbf": "phpcbf --standard=PSR12 -n -p ./src ./tests",
-    "codesniffer2": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR12 -n -p /src/"
+    "fixtures": [
+      "bin/console doctrine:cache:clear-metadata",
+      "bin/console doctrine:database:create --if-not-exists",
+      "bin/console doctrine:schema:drop --force",
+      "bin/console doctrine:schema:create",
+      "bin/console doctrine:schema:validate",
+      "bin/console doctrine:fixtures:load"
+    ]
   },
   "conflict": {
     "symfony/symfony": "*"
