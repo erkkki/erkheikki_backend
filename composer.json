@@ -58,6 +58,13 @@
     "test": [
       "@phpstan",
       "@phpcs",
+      "@fixtures",
+      "@phpunit"
+    ],
+    "test_windows": [
+      "@phpstan",
+      "@phpcs_windows",
+      "@fixtures",
       "@phpunit"
     ],
     "phpstan": "phpstan analyse -c phpstan.neon.dist ./src ./tests --level 7 --no-progress",
