@@ -6,11 +6,14 @@
   "require": {
     "php": ">=7.4",
     "ext-ctype": "*",
+    "ext-gmp": "*",
     "ext-iconv": "*",
     "composer/package-versions-deprecated": "1.11.99.1",
     "doctrine/doctrine-bundle": "^2.3",
     "doctrine/doctrine-migrations-bundle": "^3.1",
     "doctrine/orm": "^2.8",
+    "jms/serializer": "^3.12",
+    "ramsey/uuid": "^4.1",
     "symfony/console": "5.2.*",
     "symfony/dotenv": "5.2.*",
     "symfony/flex": "^1.3.1",
@@ -65,7 +68,7 @@
     "phpcs": "phpcs -n -p",
     "phpcbf": "phpcbf -n -p --standard=PSR12 ./src ./tests",
     "fixtures": [
-      "php bin/console doctrine:cache:clear-metadata",
+      "php bin/console doctrine:database:drop --force",
       "php bin/console doctrine:database:create --if-not-exists",
       "php bin/console doctrine:schema:drop --force",
       "php bin/console doctrine:schema:create",
