@@ -56,20 +56,13 @@
       "php bin/phpunit"
     ],
     "test": [
-      "@phpstan",
-      "@phpcs",
       "@fixtures",
-      "@phpunit"
-    ],
-    "test_windows": [
+      "@phpunit",
       "@phpstan",
-      "@phpcs_windows",
-      "@fixtures",
-      "@phpunit"
+      "@phpcs"
     ],
     "phpstan": "phpstan analyse -c phpstan.neon.dist ./src ./tests --level 7 --no-progress",
-    "phpcs": "phpcs -n -p --standard=PSR12 ./src ./tests",
-    "phpcs_windows": "phpcs -n -p ./src ./tests",
+    "phpcs": "phpcs -n -p",
     "phpcbf": "phpcbf -n -p --standard=PSR12 ./src ./tests",
     "fixtures": [
       "php bin/console doctrine:cache:clear-metadata",
