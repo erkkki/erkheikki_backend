@@ -1,7 +1,6 @@
 parameters:
     checkGenericClassInNonGenericObjectType: false
     bootstrapFiles:
-       - bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
     symfony:
         # or with Symfony 4.2+
         # container_xml_path: var/cache/dev/srcApp_KernelDevDebugContainer.xml
