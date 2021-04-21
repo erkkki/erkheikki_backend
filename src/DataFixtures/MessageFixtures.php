@@ -26,7 +26,7 @@ class MessageFixtures extends Fixture
         $manager->persist($message);
 
         $message = new Message();
-        $message->setMessage('Lorem ipsum two');
+        $message->setMessage('Lorem ipsum two ');
         $message->setColor('#ff12ff');
         $message->setUuid($this->generator->getUuidShort());
         $manager->persist($message);

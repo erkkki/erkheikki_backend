@@ -34,7 +34,7 @@ class MessageTest extends KernelTestCase
         $message = $messageRepo->find(2);
 
 
-        $this->assertEquals('Lorem ipsum two', $message->getMessage());
+        $this->assertEquals('Lorem ipsum two ', $message->getMessage());
         $this->assertEquals('#ff12ff', $message->getColor());
 
         $message = $messageRepo->find(3);
