@@ -22,19 +22,16 @@ class MessageFixtures extends Fixture
         $message = new Message();
         $message->setMessage('Lorem ipsum');
         $message->setColor('#ff12ff');
-        $message->setUuid($this->generator->getUuidShort());
         $manager->persist($message);
 
         $message = new Message();
         $message->setMessage('Lorem ipsum two ');
         $message->setColor('#ff12ff');
-        $message->setUuid($this->generator->getUuidShort());
         $manager->persist($message);
 
         $message = new Message();
         $message->setMessage();
         $message->setColor();
-        $message->setUuid($this->generator->getUuidShort());
         $manager->persist($message);
 
         $manager->flush();

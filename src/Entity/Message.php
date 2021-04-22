@@ -2,12 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Service\UuidGenerator;
 use App\Repository\MessageRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Exclude;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
+ * @ApiResource(
+ *     collectionOperations={"post"},
+ *     itemOperations={"get"}
+ * )
  * @ORM\Entity(repositoryClass=MessageRepository::class)
+ * @HasLifecycleCallbacks
  */
 class Message
 {
@@ -33,6 +42,45 @@ class Message
      * @ORM\Column(type="string",length=30, nullable=true)
      */
     private string $uuid;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private DateTime $createdAt;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedTime(): void
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setCreatedAt($dateTimeNow);
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function generateShortUuid(): void
+    {
+        $generator = new UuidGenerator();
+        $this->setUuid($generator->getUuidShort());
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     */
+    public function setCreatedAt(DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
 
     public function getId(): ?int
     {

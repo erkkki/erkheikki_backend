@@ -7,8 +7,8 @@
         "php": ">=7.4",
         "ext-ctype": "*",
         "ext-gmp": "*",
-        "ext-json": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "api-platform/core": "^2.6",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
@@ -110,8 +110,7 @@
         "symfony/http-client": "5.2.*",
         "symfony/maker-bundle": "^1.30",
         "symfony/phpunit-bridge": "^5.2",
-        "symfony/requirements-checker": "^2.0",
-        "ext-mysql_xdevapi": "*"
+        "symfony/requirements-checker": "^2.0"
     },
     "name": "erkkki/testing",
     "description": ""
