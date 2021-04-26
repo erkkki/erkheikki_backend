@@ -1,4 +1,6 @@
 {
+    "name": "erkkki/erkheikki_backend",
+    "description": "Symfony backend for erkheikki.fi",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
@@ -64,10 +66,16 @@
             "requirements-checker": "script"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@database"
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "database": [
+            "php bin/console doctrine:database:drop --force",
+            "php bin/console doctrine:database:create --if-not-exists",
+            "php bin/console doctrine:migrations:migrate -n"
         ],
         "phpunit": [
             "phpunit"
@@ -112,7 +120,5 @@
         "symfony/maker-bundle": "^1.30",
         "symfony/phpunit-bridge": "^5.2",
         "symfony/requirements-checker": "^2.0"
-    },
-    "name": "erkkki/testing",
-    "description": ""
+    }
 }
