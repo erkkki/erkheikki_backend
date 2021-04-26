@@ -38,6 +38,9 @@
         "symfony/yaml": "5.2.*"
     },
     "config": {
+        "platform": {
+            "php": "7.4"
+        },
         "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"
