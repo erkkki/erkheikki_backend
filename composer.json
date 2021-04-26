@@ -69,8 +69,7 @@
             "requirements-checker": "script"
         },
         "post-install-cmd": [
-            "@auto-scripts",
-            "@database"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
