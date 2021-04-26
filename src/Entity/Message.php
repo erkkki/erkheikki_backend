@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Service\UuidGenerator;
 use App\Repository\MessageRepository;
 use DateTime;
@@ -21,6 +22,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 class Message
 {
     /**
+     * @ApiProperty(identifier=false)
      * @Exclude
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -31,15 +33,16 @@ class Message
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $message;
+    private ?string $message = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $color;
+    private ?string $color = null;
 
     /**
-     * @ORM\Column(type="string",length=30, nullable=true)
+     * @ApiProperty(identifier=true)
+     * @ORM\Column(type="string", unique=true)
      */
     private string $uuid;
 
