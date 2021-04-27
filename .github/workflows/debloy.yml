@@ -17,6 +17,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd erkheikki_backend
+            ssh -T git@github.com
             git pull origin master
 #            composer install --no-dev --optimize-autoloader
 #            composer run migrate -n
