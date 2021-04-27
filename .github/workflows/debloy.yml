@@ -15,5 +15,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: |  
-            whoami
+          script: |
+            git pull origin master
+            composer install --no-dev --optimize-autoloader
+            composer run migrate

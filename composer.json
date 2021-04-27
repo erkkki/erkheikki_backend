@@ -90,6 +90,7 @@
             "@phpcs"
         ],
         "phpstan": "phpstan analyse -c phpstan.neon.dist ./src ./tests --level 7 --no-progress",
+        "migrate": "php bin/console doctrine:migrations:migrate",
         "phpcs": "phpcs -n -p",
         "phpcbf": "phpcbf -n -p --standard=PSR12 ./src ./tests",
         "fixtures": [
