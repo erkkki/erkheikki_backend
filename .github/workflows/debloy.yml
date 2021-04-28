@@ -21,3 +21,4 @@ jobs:
             git pull origin master
             composer install --no-dev --optimize-autoloader
             composer run migrate -n
+            APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
