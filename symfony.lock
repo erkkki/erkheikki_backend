@@ -135,6 +135,15 @@
             "./config/packages/fos_rest.yaml"
         ]
     },
+    "guzzlehttp/guzzle": {
+        "version": "7.3.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.8.2"
+    },
     "jms/metadata": {
         "version": "2.5.0"
     },
@@ -158,6 +167,18 @@
     "justinrainbow/json-schema": {
         "version": "5.2.10"
     },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "1.20",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.20",
+            "ref": "80acc9223a205cbf5d9828fd616c82a374d281dd"
+        },
+        "files": [
+            "./config/packages/knpu_oauth2_client.yaml"
+        ]
+    },
     "laminas/laminas-code": {
         "version": "4.1.0"
     },
@@ -166,6 +187,12 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.2.0"
+    },
+    "league/oauth2-client": {
+        "version": "2.6.0"
+    },
+    "league/oauth2-google": {
+        "version": "4.0.0"
     },
     "nelmio/cors-bundle": {
         "version": "1.5",
@@ -181,6 +208,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
+    },
+    "paragonie/random_compat": {
+        "version": "v9.99.100"
     },
     "phpstan/extension-installer": {
         "version": "1.1.0"
@@ -203,11 +233,20 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.3"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "ramsey/collection": {
         "version": "1.1.3"
