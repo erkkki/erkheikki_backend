@@ -1,7 +1,17 @@
 api_platform:
+    formats:
+        jsonld:   ['application/ld+json']
+        json: ['application/json']
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
         versions: [3]
+
+    # Enable the entrypoint.
+    enable_entrypoint: false
+
+    # Enable the docs.
+    enable_docs: false
+

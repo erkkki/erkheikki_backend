@@ -26,7 +26,7 @@ class GoogleController extends AbstractController
         SessionInterface $session
     ): RedirectResponse {
         $referer = $session->get('referer');
-        
+
         if ($referer === null) {
             $referer = $request->headers->get('referer');
 

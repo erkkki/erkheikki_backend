@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 /**
  * @ApiResource(
  *     collectionOperations={"post"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
  * )
  * @ORM\Entity(repositoryClass=MessageRepository::class)
  * @HasLifecycleCallbacks
@@ -76,7 +76,7 @@ class Message
     }
 
     /**
-     * @param DateTime $createdAt
+     * @param DateTime $createdAt)
      */
     public function setCreatedAt(DateTime $createdAt): void
     {
@@ -93,6 +93,10 @@ class Message
         return $this->message;
     }
 
+    /**
+     * @param string $message
+     * @return $this
+     */
     public function setMessage(string $message = ""): self
     {
         $this->message = $message;
