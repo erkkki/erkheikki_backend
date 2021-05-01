@@ -8,7 +8,6 @@ use App\Service\UuidGenerator;
 use App\Repository\MessageRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\Exclude;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
@@ -23,7 +22,6 @@ class Message
 {
     /**
      * @ApiProperty(identifier=false)
-     * @Exclude
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")

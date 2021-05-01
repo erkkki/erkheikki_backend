@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @HasLifecycleCallbacks
  */
 class User implements UserInterface
 {
@@ -32,7 +31,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private ?string $uuid;
-
 
     /**
      * @ORM\Column(type="boolean")

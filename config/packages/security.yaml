@@ -14,6 +14,8 @@ security:
             anonymous: true
             lazy: true
             provider: app_user_provider
+            logout:
+                path: app_logout
             guard:
                 authenticators:
                     - App\Security\GoogleAuthenticator
@@ -27,6 +29,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/loggedin, roles: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
