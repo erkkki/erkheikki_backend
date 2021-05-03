@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
+     * Return current logged in user
      * @Route("/api/user", name="user")
      */
     public function index(): Response
