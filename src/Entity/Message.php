@@ -9,11 +9,13 @@ use App\Repository\MessageRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={"post"},
  *     itemOperations={"get"},
+ *     normalizationContext={"groups"={"read"}},
  * )
  * @ORM\Entity(repositoryClass=MessageRepository::class)
  * @HasLifecycleCallbacks
@@ -30,22 +32,26 @@ class Message
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private ?string $message = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private ?string $color = null;
 
     /**
      * @ApiProperty(identifier=true)
      * @ORM\Column(type="string", unique=true)
+     * @Groups({"read"})
      */
     private string $uuid;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read"})
      */
     private DateTime $createdAt;
 

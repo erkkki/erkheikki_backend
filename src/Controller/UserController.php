@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * Return current logged in user
+     * Return current logged in user | null if not
      * @Route("/api/user", name="user")
      */
     public function index(): Response
@@ -21,9 +21,9 @@ class UserController extends AbstractController
         $serializedEntity = $this->container->get('serializer')->serialize($user, 'json');
 
         $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
         $response->setContent($serializedEntity);
 
-        $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
 }

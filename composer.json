@@ -82,6 +82,8 @@
             "php bin/console doctrine:migrations:migrate -n"
         ],
         "phpunit": [
+            "php bin/console cache:clear -n --env=test",
+            "php bin/console cache:clear -n --env=dev",
             "phpunit"
         ],
         "test": [
@@ -123,6 +125,7 @@
         "symfony/css-selector": "^5.2",
         "symfony/http-client": "5.2.*",
         "symfony/maker-bundle": "^1.30",
-        "symfony/phpunit-bridge": "^5.2"
+        "symfony/phpunit-bridge": "^5.2",
+        "ext-http": "*"
     }
 }

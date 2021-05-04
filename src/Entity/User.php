@@ -4,17 +4,11 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Service\UuidGenerator;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
- * @ApiResource(
- *     itemOperations={"get"},
- *     collectionOperations={}
- * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface
@@ -30,18 +24,18 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @ApiProperty(identifier=false)
+     * @Ignore()
      */
     private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @ApiProperty(identifier=true)
      */
     private ?string $uuid;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Ignore()
      */
     private bool $enabled = false;
 
@@ -52,12 +46,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", unique=true)
+     * @Ignore()
      */
     private string $googleId;
 
     /**
      * @ORM\Column(type="json")
      * @var array<string> $roles
+     * @Ignore()
      */
     private array $roles = [];
 
@@ -131,6 +127,7 @@ class User implements UserInterface
      * This method is not needed for apps that do not check user passwords.
      *
      * @see UserInterface
+     * @Ignore()
      */
     public function getPassword(): ?string
     {
@@ -141,6 +138,7 @@ class User implements UserInterface
      * This method is not needed for apps that do not check user passwords.
      *
      * @see UserInterface
+     * @Ignore()
      */
     public function getSalt(): ?string
     {
