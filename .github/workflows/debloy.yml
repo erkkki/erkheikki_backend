@@ -16,9 +16,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            rm -r -f erkheikki_backend
+            git clone git@github.com:erkkki/erkheikki_backend.git
             cd erkheikki_backend
-            git status
-            git pull origin master
+            cp ../.env.local .env.local
+            git checkout debloy
             composer install --no-dev --optimize-autoloader
             composer run migrate -n
             APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear

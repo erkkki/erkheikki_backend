@@ -14,11 +14,11 @@ class MainController extends AbstractController
      */
     public function index(): RedirectResponse
     {
-        $env = $this->getParameter('app.env');
-
-        if ($env === "prod") {
-            return $this->redirect("https://www.erkheikki.fi");
-        }
+//        $env = $this->getParameter('app.env');
+//
+//        if ($env === "prod") {
+//            return $this->redirect("https://www.erkheikki.fi");
+//        }
         return $this->redirectToRoute('app_login');
     }
 }
