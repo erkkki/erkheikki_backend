@@ -15,7 +15,20 @@ class FavouriteTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/api/favourite_stations');
 
-        $this->assertTrue($client->getResponse() instanceof RedirectResponse);
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('Content-Type', 'application/ld+json; charset=utf-8');
+
+        /** @var string $response */
+        $response = $client->getResponse()->getContent();
+        $responseArray = json_decode($response, true);
+
+        /* What is should be */
+        $this->assertEquals("/api/contexts/FavouriteStation", $responseArray['@context']);
+        $this->assertEquals("/api/favourite_stations", $responseArray['@id']);
+        $this->assertEquals("hydra:Collection", $responseArray['@type']);
+
+        /** Should not contain any stations. */
+        $this->assertEquals(0, $responseArray['hydra:totalItems']);
     }
 
     public function testUserHasZeroFavorites(): void
@@ -44,7 +57,7 @@ class FavouriteTest extends WebTestCase
         $this->assertEquals("/api/favourite_stations", $responseArray['@id']);
         $this->assertEquals("hydra:Collection", $responseArray['@type']);
 
-        /** Should only contain 4 stations. */
+        /** Should not contain any stations. */
         $this->assertEquals(0, $responseArray['hydra:totalItems']);
     }
 

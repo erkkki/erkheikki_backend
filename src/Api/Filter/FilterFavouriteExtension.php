@@ -5,6 +5,7 @@ namespace App\Api\Filter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use App\Entity\piRadio\FavouriteStation;
 use App\Entity\User;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Security;
@@ -27,15 +28,14 @@ class FilterFavouriteExtension implements QueryCollectionExtensionInterface, Que
         string $resourceClass,
         string $operationName = null
     ): void {
-        $user = $this->security->getUser();
 
-        if (!$user instanceof User) {
-            return;
+        if (FavouriteStation::class === $resourceClass) {
+            $user = $this->security->getUser();
+
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+            $queryBuilder->andWhere(sprintf('%s.user = :user', $rootAlias));
+            $queryBuilder->setParameter('user', $user);
         }
-
-        $rootAlias = $queryBuilder->getRootAliases()[0];
-        $queryBuilder->andWhere(sprintf('%s.user = :user', $rootAlias));
-        $queryBuilder->setParameter('user', $user);
     }
 
     public function applyToItem(
@@ -46,14 +46,12 @@ class FilterFavouriteExtension implements QueryCollectionExtensionInterface, Que
         string $operationName = null,
         array $context = []
     ): void {
-        $user = $this->security->getUser();
+        if (FavouriteStation::class === $resourceClass) {
+            $user = $this->security->getUser();
 
-        if (!$user instanceof User) {
-            return;
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+            $queryBuilder->andWhere(sprintf('%s.user = :user', $rootAlias));
+            $queryBuilder->setParameter('user', $user);
         }
-
-        $rootAlias = $queryBuilder->getRootAliases()[0];
-        $queryBuilder->andWhere(sprintf('%s.user = :user', $rootAlias));
-        $queryBuilder->setParameter('user', $user);
     }
 }
