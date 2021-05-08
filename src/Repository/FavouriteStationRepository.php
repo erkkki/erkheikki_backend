@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\FavouriteStation;
+use App\Entity\piRadio\FavouriteStation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
