@@ -5,6 +5,7 @@ namespace App\Entity\piRadio;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FavouriteStationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 /**
  * @ApiResource()
