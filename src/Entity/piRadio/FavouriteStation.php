@@ -4,12 +4,24 @@ namespace App\Entity\piRadio;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FavouriteStationRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={"security"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+ *         "get"={"object.User == user"},
+ *         "post"={"object.User == user"}
+ *     },
+ *     itemOperations={"get"},
+ *     normalizationContext={"groups"={"read"}}
+ * )
  * @ORM\Entity(repositoryClass=FavouriteStationRepository::class)
+ * @HasLifecycleCallbacks
  */
 class FavouriteStation
 {
@@ -22,24 +34,36 @@ class FavouriteStation
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
      */
-    private ?User $User;
+    private ?User $user;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
      */
     private ?string $stationuuid;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
      */
     private ?string $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read"})
      */
-    private ?\DateTimeInterface $createdAt;
+    private DateTime $createdAt;
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedTime(): void
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setCreatedAt($dateTimeNow);
+    }
 
     public function getId(): ?int
     {
@@ -48,12 +72,12 @@ class FavouriteStation
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
-    public function setUser(?User $User): self
+    public function setUser(?User $user): self
     {
-        $this->User = $User;
+        $this->user = $user;
 
         return $this;
     }
@@ -82,12 +106,12 @@ class FavouriteStation
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 

@@ -9,9 +9,9 @@ api_platform:
     swagger:
         versions: [3]
 
-    # Enable the entrypoint.
+#     Enable the entrypoint.
     enable_entrypoint: false
 
-    # Enable the docs.
+#     Enable the docs.
     enable_docs: false
 
