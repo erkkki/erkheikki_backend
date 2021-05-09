@@ -2,14 +2,11 @@
 
 namespace App\Tests\Api;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class FavouriteTest extends WebTestCase
 {
-
     public function testUserNotLoggedIn(): void
     {
         $client = static::createClient();
@@ -81,7 +78,6 @@ class FavouriteTest extends WebTestCase
         $response = $client->getResponse()->getContent();
 
         $responseArray = json_decode($response, true);
-//        var_dump($responseArray);
 
         /* What is should be */
         $this->assertEquals("/api/contexts/FavouriteStation", $responseArray['@context']);
