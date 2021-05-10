@@ -4,15 +4,18 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use League\OAuth2\Client\Provider\GoogleUser;
+use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class GoogleAuthenticator extends SocialAuthenticator
@@ -43,9 +46,9 @@ class GoogleAuthenticator extends SocialAuthenticator
 
     /**
      * @param Request $request
-     * @return \League\OAuth2\Client\Token\AccessToken
+     * @return AccessToken
      */
-    public function getCredentials(Request $request): \League\OAuth2\Client\Token\AccessToken
+    public function getCredentials(Request $request): AccessToken
     {
         // this method is only called if supports() returns true
 
@@ -55,12 +58,12 @@ class GoogleAuthenticator extends SocialAuthenticator
     /**
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
-     * @return \Symfony\Component\Security\Core\User\UserInterface|null
+     * @return UserInterface|null
      */
     public function getUser(
         $credentials,
         UserProviderInterface $userProvider
-    ): ?\Symfony\Component\Security\Core\User\UserInterface {
+    ): ?UserInterface {
         /** @var GoogleUser $googleUser */
         $googleUser = $this->getGoogleClient()->fetchUserFromToken($credentials);
         $email = $googleUser->getEmail();
@@ -91,9 +94,9 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @return \KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface
+     * @return OAuth2ClientInterface
      */
-    private function getGoogleClient(): \KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface
+    private function getGoogleClient(): OAuth2ClientInterface
     {
         return $this->clientRegistry->getClient('google');
     }
@@ -134,7 +137,7 @@ class GoogleAuthenticator extends SocialAuthenticator
     public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
     {
         return new RedirectResponse(
-            '/connect/google', // might be the site, where users choose their oauth provider
+            '/login', // might be the site, where users choose their oauth provider
             Response::HTTP_TEMPORARY_REDIRECT
         );
     }

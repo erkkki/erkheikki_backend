@@ -13,10 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     collectionOperations={
- *         "get",
- *         "post"
+ *         "get"
  *     },
- *     itemOperations={"get"},
+ *     itemOperations={"get", "delete"},
  *     normalizationContext={"groups"={"read"}}
  * )
  * @ORM\Entity(repositoryClass=FavouriteStationRepository::class)
@@ -28,6 +27,7 @@ class FavouriteStation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private ?int $id;
 

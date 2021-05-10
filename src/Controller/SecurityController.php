@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,10 +28,10 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logout", name="app_logout", methods={"GET"})
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function logout(): void
     {
-        throw new \Exception('this should not be reached!');
+        throw new Exception('this should not be reached!');
     }
 }

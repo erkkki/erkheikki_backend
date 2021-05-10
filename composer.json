@@ -82,6 +82,7 @@
             "@migrate"
         ],
         "phpunit": [
+            "@fixtures",
             "php bin/console cache:clear -n --env=test",
             "php bin/console cache:clear -n --env=dev",
             "phpunit"
