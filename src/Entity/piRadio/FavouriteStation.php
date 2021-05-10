@@ -7,19 +7,20 @@ use App\Repository\FavouriteStationRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  *     collectionOperations={
- *         "get"
+ *          "get",
+ *          "post"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     itemOperations={"get", "delete"},
  *     normalizationContext={"groups"={"read"}}
  * )
  * @ORM\Entity(repositoryClass=FavouriteStationRepository::class)
- * @HasLifecycleCallbacks
+ * @ORM\EntityListeners({"App\Listener\FavouriteStationListener"})
  */
 class FavouriteStation
 {
@@ -34,17 +35,19 @@ class FavouriteStation
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      */
-    private ?User $user;
+    private ?User $user = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read"})
+     * @Assert\NotBlank
      */
-    private ?string $stationuuid;
+    private string $stationuuid;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read"})
+     * @Assert\NotBlank
      */
     private ?string $name;
 
@@ -53,16 +56,6 @@ class FavouriteStation
      * @Groups({"read"})
      */
     private DateTime $createdAt;
-
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedTime(): void
-    {
-        $dateTimeNow = new DateTime('now');
-        $this->setCreatedAt($dateTimeNow);
-    }
 
     public function getId(): ?int
     {

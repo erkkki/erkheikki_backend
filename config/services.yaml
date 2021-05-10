@@ -22,6 +22,14 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
+    App\Listener\FavouriteStationListener:
+         tags:
+             -
+                 # these are the options required to define the entity listener
+                 name: 'doctrine.orm.entity_listener'
+                 event: 'prePersist'
+                 entity: 'App\Entity\FavouriteStation'
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:

@@ -145,10 +145,7 @@ class FavouriteTest extends WebTestCase
 
         $newFavStation = ['name' => 'test'];
 
-
-
         $this->jsonRequest($client, 'POST', $newFavStation);
-
         $this->assertResponseStatusCodeSame(422);
     }
 
@@ -186,13 +183,19 @@ class FavouriteTest extends WebTestCase
 
     private function jsonRequest(KernelBrowser $client, string $method, array $content): void
     {
+        $content = json_encode($content);
+
+        if (!$content) {
+            $content = null;
+        }
+
         $client->request(
             $method,
             '/api/favourite_stations',
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
-            json_encode($content)
+            $content
         );
     }
 }
