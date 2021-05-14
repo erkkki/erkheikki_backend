@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\EntityListeners({"App\Listener\UserListener"})
  */
 class User implements UserInterface
 {
@@ -21,6 +23,16 @@ class User implements UserInterface
      * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      */
     private string $id;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private DateTime $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private DateTime $lastSeen;
 
     /**
      * @ORM\Column(type="boolean")
@@ -144,5 +156,37 @@ class User implements UserInterface
     public function setEnabled(bool $true): void
     {
         $this->enabled = $true;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     */
+    public function setCreatedAt(DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getLastSeen(): DateTime
+    {
+        return $this->lastSeen;
+    }
+
+    /**
+     * @param DateTime $lastSeen
+     */
+    public function setLastSeen(DateTime $lastSeen): void
+    {
+        $this->lastSeen = $lastSeen;
     }
 }
