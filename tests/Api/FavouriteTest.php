@@ -107,6 +107,7 @@ class FavouriteTest extends WebTestCase
 
         $this->assertResponseRedirects('/login');
     }
+
     public function testAddNew(): void
     {
         $client = static::createClient();

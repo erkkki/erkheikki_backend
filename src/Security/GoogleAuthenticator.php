@@ -90,7 +90,9 @@ class GoogleAuthenticator extends SocialAuthenticator
         $this->em->persist($user);
         $this->em->flush();
 
-        return $userProvider->loadUserByUsername($user->getUsername());
+        return $user;
+        /** TODO weird error with id / uuid */
+//        return $userProvider->loadUserByUsername($user->getUsername());
     }
 
     /**

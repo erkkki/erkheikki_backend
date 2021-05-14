@@ -6,6 +6,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FavouriteStationRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use App\Entity\User;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,11 +28,11 @@ class FavouriteStation
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Groups({"read"})
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      */
-    private ?int $id;
+    private Uuid $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
@@ -57,7 +59,7 @@ class FavouriteStation
      */
     private DateTime $createdAt;
 
-    public function getId(): ?int
+    public function getId(): Uuid
     {
         return $this->id;
     }

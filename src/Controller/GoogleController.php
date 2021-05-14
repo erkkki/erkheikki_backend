@@ -14,9 +14,9 @@ class GoogleController extends AbstractController
     /**
      * Link to this controller to start the "connect" process
      * @param ClientRegistry $clientRegistry
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return RedirectResponse
      * @Route("/connect/google", name="connect_google_start")
      *
      */
@@ -29,10 +29,8 @@ class GoogleController extends AbstractController
 
         if ($referer === null) {
             $referer = $request->headers->get('referer');
-
             $session->set('referer', $referer);
         }
-
 
         return $clientRegistry
             ->getClient('google')
@@ -48,8 +46,8 @@ class GoogleController extends AbstractController
      *
      *
      * @Route("/connect/google/check", name="connect_google_check")
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param SessionInterface $session
+     * @return RedirectResponse
      */
     public function connectCheckAction(SessionInterface $session): RedirectResponse
     {

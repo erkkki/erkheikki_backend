@@ -4,35 +4,33 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
-use App\Service\UuidGenerator;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use App\Repository\MessageRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={"post"},
  *     itemOperations={"get"},
- *     normalizationContext={"groups"={"read"}},
  * )
  * @ORM\Entity(repositoryClass=MessageRepository::class)
- * @HasLifecycleCallbacks
+ * @ORM\EntityListeners({"App\Listener\MessageListener"})
  */
 class Message
 {
     /**
-     * @ApiProperty(identifier=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      */
-    private int $id;
+    private Uuid $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read"})
      */
     private ?string $message = null;
 
@@ -43,35 +41,10 @@ class Message
     private ?string $color = null;
 
     /**
-     * @ApiProperty(identifier=true)
-     * @ORM\Column(type="string", unique=true)
-     * @Groups({"read"})
-     */
-    private string $uuid;
-
-    /**
      * @ORM\Column(type="datetime")
      * @Groups({"read"})
      */
     private DateTime $createdAt;
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedTime(): void
-    {
-        $dateTimeNow = new DateTime('now');
-        $this->setCreatedAt($dateTimeNow);
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function generateShortUuid(): void
-    {
-        $generator = new UuidGenerator();
-        $this->setUuid($generator->getUuidShort());
-    }
 
     /**
      * @return DateTime
@@ -89,7 +62,7 @@ class Message
         $this->createdAt = $createdAt;
     }
 
-    public function getId(): ?int
+    public function getId(): Uuid
     {
         return $this->id;
     }
@@ -124,21 +97,5 @@ class Message
     public function setColor(string $color = ""): void
     {
         $this->color = $color;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUuid(): string
-    {
-        return $this->uuid;
-    }
-
-    /**
-     * @param string $uuid
-     */
-    public function setUuid(string $uuid): void
-    {
-        $this->uuid = $uuid;
     }
 }

@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Tests\Api;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
-use http\Client\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserControllerTest extends WebTestCase
+class UserTest extends WebTestCase
 {
-
-    /** User should be null */
     public function testUserNotLoggedIn(): void
     {
         $client = static::createClient();
-
         $client->request('GET', '/api/user');
 
         $this->assertResponseIsSuccessful();
@@ -22,10 +17,9 @@ class UserControllerTest extends WebTestCase
 
         /** @var string $response */
         $response = $client->getResponse()->getContent();
-        $this->assertJson('null', $response);
+        $this->assertEquals('null', $response);
     }
 
-    /** Should return user */
     public function testUserLoggedIn(): void
     {
         $client = static::createClient();
@@ -42,14 +36,13 @@ class UserControllerTest extends WebTestCase
 
         /** @var string $response */
         $response = $client->getResponse()->getContent();
-
         $responseUser = json_decode($response, true);
 
-        $this->assertArrayHasKey("uuid", $responseUser);
+
+        $this->assertArrayHasKey("id", $responseUser);
         $this->assertArrayHasKey("email", $responseUser);
         $this->assertArrayHasKey("username", $responseUser);
 
-        $this->assertArrayNotHasKey("id", $responseUser);
         $this->assertArrayNotHasKey("roles", $responseUser);
         $this->assertArrayNotHasKey("password", $responseUser);
         $this->assertArrayNotHasKey("salt", $responseUser);

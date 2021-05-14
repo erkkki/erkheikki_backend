@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use App\Service\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -13,25 +14,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-
-    public function __construct()
-    {
-        $generator = new UuidGenerator();
-        $this->setUuid($generator->getUuid());
-    }
-
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Ignore()
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      */
-    private ?int $id;
-
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private ?string $uuid;
+    private string $id;
 
     /**
      * @ORM\Column(type="boolean")
@@ -57,14 +46,9 @@ class User implements UserInterface
      */
     private array $roles = [];
 
-    public function getId(): ?int
+    public function getId(): string
     {
         return $this->id;
-    }
-
-    public function getUuid(): ?string
-    {
-        return $this->uuid;
     }
 
     /**
@@ -83,13 +67,6 @@ class User implements UserInterface
         $this->googleId = $googleId;
     }
 
-    public function setUuid(string $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
-    }
-
     /**
      * A visual identifier that represents this user.
      *
@@ -97,7 +74,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->uuid;
+        return (string) $this->email;
     }
 
     /**
