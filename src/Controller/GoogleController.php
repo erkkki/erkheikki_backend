@@ -17,7 +17,7 @@ class GoogleController extends AbstractController
      * @param Request $request
      * @param SessionInterface $session
      * @return RedirectResponse
-     * @Route("/connect/google", name="connect_google_start")
+     * @Route("/auth/connect/google", name="connect_google_start")
      *
      */
     public function connectAction(
@@ -45,7 +45,7 @@ class GoogleController extends AbstractController
      * in config/packages/knpu_oauth2_client.yaml
      *
      *
-     * @Route("/connect/google/check", name="connect_google_check")
+     * @Route("/auth/connect/google/check", name="connect_google_check")
      * @param SessionInterface $session
      * @return RedirectResponse
      */
@@ -58,6 +58,7 @@ class GoogleController extends AbstractController
         if ($referer !== null) {
             return $this->redirect($referer);
         }
+//        return $this->redirectToRoute('main');
         return $this->redirectToRoute('main');
     }
 }

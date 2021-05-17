@@ -10,15 +10,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="main")
+     * @Route("/auth", name="main")
      */
     public function index(): RedirectResponse
     {
-//        $env = $this->getParameter('app.env');
-//
-//        if ($env === "prod") {
-//            return $this->redirect("https://www.erkheikki.fi");
-//        }
+        $env = $this->getParameter('app.env');
+
+        if ($env === "prod") {
+            return $this->redirect("https://www.erkheikki.fi");
+        }
+//        return $this->redirectToRoute('app_login');
         return $this->redirectToRoute('app_login');
     }
 }

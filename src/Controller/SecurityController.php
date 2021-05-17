@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login", methods={"GET"})
+     * @Route("/auth/login", name="app_login", methods={"GET"})
      */
     public function login(Request $request, SessionInterface $session): Response
     {
@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout", methods={"GET"})
+     * @Route("/auth/logout", name="app_logout", methods={"GET"})
      *
      * @throws Exception
      */
